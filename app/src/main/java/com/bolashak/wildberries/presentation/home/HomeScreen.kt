@@ -84,7 +84,8 @@ fun HomeScreen(
                         product = product,
                         onClick = { 
                             navController.navigate(Screen.ProductDetail.createRoute(product.id))
-                        }
+                        },
+                        currencyManager = viewModel.currencyManager
                     )
                 }
             }

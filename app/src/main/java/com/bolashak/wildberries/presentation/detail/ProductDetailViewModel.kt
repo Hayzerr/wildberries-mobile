@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 import com.bolashak.wildberries.data.repository.ProductDetailsRepository
 import com.bolashak.wildberries.domain.manager.CartManager
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.manager.FavoritesManager
 import com.bolashak.wildberries.domain.model.Review
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,6 +27,7 @@ class ProductDetailViewModel @Inject constructor(
     private val productDetailsRepository: ProductDetailsRepository,
     private val cartManager: CartManager,
     private val favoritesManager: FavoritesManager,
+    val currencyManager: CurrencyManager,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 

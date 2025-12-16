@@ -40,6 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.model.CartItem
 import com.bolashak.wildberries.presentation.navigation.Screen
 import com.bolashak.wildberries.presentation.theme.WBPurple
@@ -161,13 +162,18 @@ fun CartScreen(
                         CartItemRow(
                             cartItem = cartItem,
                             onItemClick = { navController.navigate(Screen.ProductDetail.createRoute(cartItem.product.id)) },
-                            onRemove = { viewModel.removeProduct(cartItem) }
+                            onRemove = { viewModel.removeProduct(cartItem) },
+                            currencyManager = viewModel.currencyManager
                         )
                     }
                 }
             }
 
-            CartBottomBar(total = total, onCheckout = { showCheckoutDialog = true })
+            CartBottomBar(
+                total = total,
+                onCheckout = { showCheckoutDialog = true },
+                currencyManager = viewModel.currencyManager
+            )
         }
     }
 }
@@ -247,7 +253,8 @@ fun EmptyCartState(onBrowseClick: () -> Unit) {
 fun CartItemRow(
     cartItem: CartItem,
     onItemClick: () -> Unit,
-    onRemove: () -> Unit
+    onRemove: () -> Unit,
+    currencyManager: CurrencyManager? = null
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -286,8 +293,9 @@ fun CartItemRow(
                     maxLines = 2
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+                val priceText = currencyManager?.convertPrice(cartItem.product.price) ?: "${cartItem.product.price} ₽"
                 Text(
-                    text = "${cartItem.product.price} ₽ × ${cartItem.count}",
+                    text = "$priceText × ${cartItem.count}",
                     style = MaterialTheme.typography.titleMedium,
                     color = WBPurple,
                     fontWeight = FontWeight.Bold
@@ -302,7 +310,7 @@ fun CartItemRow(
 }
 
 @Composable
-fun CartBottomBar(total: Int, onCheckout: () -> Unit) {
+fun CartBottomBar(total: Int, onCheckout: () -> Unit, currencyManager: CurrencyManager? = null) {
     Surface(
         color = Color.White,
         shadowElevation = 8.dp,
@@ -315,7 +323,7 @@ fun CartBottomBar(total: Int, onCheckout: () -> Unit) {
             Column(modifier = Modifier.weight(1f)) {
                 Text("Total:", style = MaterialTheme.typography.bodyMedium, color = Color.Gray)
                 Text(
-                    text = "$total ₽",
+                    text = currencyManager?.convertPrice(total) ?: "$total ₽",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = WBPurple

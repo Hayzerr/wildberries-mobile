@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.model.Product
 import com.bolashak.wildberries.presentation.theme.WBPurple
 import com.bolashak.wildberries.presentation.theme.WBRed
@@ -46,7 +47,8 @@ fun ProductItem(
     product: Product,
     onClick: () -> Unit,
     isFavorite: Boolean = false,
-    onFavoriteClick: (() -> Unit)? = null
+    onFavoriteClick: (() -> Unit)? = null,
+    currencyManager: CurrencyManager? = null
 ) {
     Card(
         modifier = Modifier
@@ -90,7 +92,7 @@ fun ProductItem(
 
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(
-                    text = "${product.price} ₽",
+                    text = currencyManager?.convertPrice(product.price) ?: "${product.price} ₽",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = WBRed,

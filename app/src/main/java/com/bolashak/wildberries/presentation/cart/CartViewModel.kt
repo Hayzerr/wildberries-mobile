@@ -3,6 +3,7 @@ package com.bolashak.wildberries.presentation.cart
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bolashak.wildberries.domain.manager.CartManager
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.manager.PurchasesManager
 import com.bolashak.wildberries.domain.model.CartItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val cartManager: CartManager,
-    private val purchasesManager: PurchasesManager
+    private val purchasesManager: PurchasesManager,
+    val currencyManager: CurrencyManager
 ) : ViewModel() {
     val items = cartManager.items
     val totalPrice = cartManager.totalPrice

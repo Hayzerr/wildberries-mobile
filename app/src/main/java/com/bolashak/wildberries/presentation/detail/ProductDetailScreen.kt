@@ -120,7 +120,7 @@ fun ProductDetailScreen(
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(verticalAlignment = Alignment.Bottom) {
                     Text(
-                        text = "${p.price} ₽",
+                        text = viewModel.currencyManager.convertPrice(p.price),
                         style = MaterialTheme.typography.headlineMedium,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold

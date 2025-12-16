@@ -3,6 +3,7 @@ package com.bolashak.wildberries.presentation.product_list
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.model.Product
 import com.bolashak.wildberries.domain.usecase.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    val currencyManager: CurrencyManager
 ) : ViewModel() {
 
     private val categoryId: String = checkNotNull(savedStateHandle["category"])

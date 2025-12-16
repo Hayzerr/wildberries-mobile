@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.CurrencyExchange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material3.*
@@ -33,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bolashak.wildberries.domain.manager.PurchasedItem
+import com.bolashak.wildberries.presentation.currency.CurrencyScreen
 import com.bolashak.wildberries.presentation.theme.WBPurple
 import com.bolashak.wildberries.presentation.theme.WBPurpleDark
 import com.bolashak.wildberries.presentation.theme.WBRed
@@ -62,6 +64,7 @@ fun ProfileScreen(
                 purchases = purchases
             )
             "Personal" -> PersonalDataScreen(onBack = { currentScreen = "Main" })
+            "Currency" -> CurrencyScreen(onBack = { currentScreen = "Main" })
         }
     }
 }
@@ -128,6 +131,12 @@ fun ProfileMain(onNavigate: (String) -> Unit, purchaseCount: Int = 0) {
                 title = "Personal Data",
                 icon = Icons.Default.Person,
                 onClick = { onNavigate("Personal") }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            ProfileMenuItem(
+                title = "Currency",
+                icon = Icons.Default.CurrencyExchange,
+                onClick = { onNavigate("Currency") }
             )
         }
     }

@@ -2,6 +2,7 @@ package com.bolashak.wildberries.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bolashak.wildberries.domain.manager.CurrencyManager
 import com.bolashak.wildberries.domain.model.Product
 import com.bolashak.wildberries.domain.usecase.GetProductsUseCase
 import com.bolashak.wildberries.domain.usecase.SearchProductsUseCase
@@ -22,7 +23,8 @@ data class HomeState(
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
-    private val searchProductsUseCase: SearchProductsUseCase
+    private val searchProductsUseCase: SearchProductsUseCase,
+    val currencyManager: CurrencyManager
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())

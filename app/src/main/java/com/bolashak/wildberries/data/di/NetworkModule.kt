@@ -1,5 +1,6 @@
 package com.bolashak.wildberries.data.di
 
+import com.bolashak.wildberries.data.remote.CurrencyApi
 import com.bolashak.wildberries.data.remote.WildberriesApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -46,4 +47,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideWildberriesApi(retrofit: Retrofit): WildberriesApi = retrofit.create(WildberriesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCurrencyApi(retrofit: Retrofit): CurrencyApi = retrofit.create(CurrencyApi::class.java)
 }
